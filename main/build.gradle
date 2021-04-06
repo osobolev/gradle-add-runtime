@@ -1,0 +1,8 @@
+plugins {
+    id "lib"
+    id "add-runtime"
+}
+
+dependencies {
+    implementation(project(":sub2"))
+} 
