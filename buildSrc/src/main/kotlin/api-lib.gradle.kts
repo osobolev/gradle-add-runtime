@@ -9,5 +9,5 @@ java {
 }
 
 dependencies {
-    "addImplRuntimeElements"(project(":${project.name}impl"))
+    "addImplRuntimeOnly"(project(":${project.name}impl"))
 }
