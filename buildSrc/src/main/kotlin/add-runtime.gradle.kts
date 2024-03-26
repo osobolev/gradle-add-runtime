@@ -1,20 +1,22 @@
 plugins {
-    id "lib"
+    id("lib")
 }
 
 configurations.testRuntimeClasspath {
     resolutionStrategy.dependencySubstitution {
-        all {
-            if (it.requested instanceof ProjectComponentSelector) {
-                def refProject = findProject(it.requested.projectPath)
+        all(Action {
+            val it = this
+            val requested = it.requested
+            if (requested is ProjectComponentSelector) {
+                val refProject = findProject(requested.projectPath)!!
                 if (refProject.plugins.findPlugin("api-lib") != null) {
-                    it.useTarget variant(it.requested) {
+                    it.useTarget(variant(requested) {
                         capabilities {
                             requireCapability("${refProject.group}:${refProject.name}-add-impl")
                         }
-                    }
+                    })
                 }
             }
-        }
+        })
     }
 }
