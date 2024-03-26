@@ -1,6 +1,6 @@
 plugins {
-    id "lib"
-    id "add-runtime"
+    `lib`
+    `add-runtime`
 }
 
 dependencies {
