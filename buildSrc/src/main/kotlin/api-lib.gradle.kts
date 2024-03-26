@@ -2,12 +2,18 @@ plugins {
     id("lib")
 }
 
+sourceSets {
+    create("api") {
+        java.srcDir("api-src/main/java")
+    }
+}
+
 java {
     registerFeature("addImpl") {
-        usingSourceSet(sourceSets["main"])
+        usingSourceSet(sourceSets["api"])
     }
 }
 
 dependencies {
-    "addImplRuntimeOnly"(project(":${project.name}impl"))
+    "apiRuntimeOnly"(project(":${project.name}impl"))
 }
