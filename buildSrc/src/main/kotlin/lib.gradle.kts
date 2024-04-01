@@ -9,7 +9,7 @@ repositories {
     mavenCentral()
 }
 
-fun replaceWithImpl(projectPath: String, conf: String): Boolean {
+fun shouldAddImpl(projectPath: String, conf: String): Boolean {
     return projectPath == ":main" && conf == "testRuntimeClasspath";
 }
 
@@ -22,7 +22,7 @@ configurations.all {
             if (requested is ProjectComponentSelector && requested.requestedCapabilities.isEmpty()) {
                 val refProject = findProject(requested.projectPath)!!
                 if (refProject.plugins.findPlugin("api-lib") != null) {
-                    val variantName = if (replaceWithImpl(project.path, conf.name)) "my-impl" else "my-api"
+                    val variantName = if (shouldAddImpl(project.path, conf.name)) "my-impl" else "my-api"
                     it.useTarget(variant(requested) {
                         capabilities {
                             requireCapability("${refProject.group}:${refProject.name}-${variantName}")
