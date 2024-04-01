@@ -1,5 +1,6 @@
-This project demonstrates Gradle variants: if you have `api1` (described by `api-lib` plugin) and its implementation `api1impl` (and probably other APIs
-and their implementations), then `add-runtime` plugin automatically adds all project API implementations to `testRuntimeClasspath` via dependency substitution.
+This project demonstrates Gradle variants: if you have `api1` (described by `api-lib` plugin) and its implementation in `impl-src` folder (and probably other APIs
+and their implementations), then `lib` plugin automatically adds all API implementations found in the project to `testRuntimeClasspath` of the `:main` project
+via dependency substitution.
 
 For example,
 

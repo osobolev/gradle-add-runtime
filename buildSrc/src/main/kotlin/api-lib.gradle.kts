@@ -3,17 +3,27 @@ plugins {
 }
 
 sourceSets {
-    create("api") {
+    create("myApi") {
         java.srcDir("api-src/main/java")
+    }
+    create("myImpl") {
+        java.srcDir("impl-src/main/java")
     }
 }
 
 java {
-    registerFeature("addImpl") {
-        usingSourceSet(sourceSets["api"])
+    registerFeature("myApi") {
+        usingSourceSet(sourceSets["myApi"])
+    }
+    registerFeature("myImpl") {
+        usingSourceSet(sourceSets["myImpl"])
     }
 }
 
 dependencies {
-    "apiRuntimeOnly"(project(":${project.name}impl"))
+    "myImplApi"(project(project.path)) {
+        capabilities {
+            requireCapability("${project.group}:${project.name}-my-api")
+        }
+    }
 }
